@@ -1,6 +1,7 @@
 const express = require('express');
 const helmet = require("helmet");
 const cors = require ("cors");
+const logger = require("./middleware/logger");
 
 const server = express();
 
@@ -16,17 +17,12 @@ server.use(logger);
 
 //set up router
 server.use("/api/projects", projectRouter);
-server.use("/api/projects", actionRouter);
+server.use("/api/actions", actionRouter);
 
 //Initial get request
 server.get("/", (req, res) => {
     res.send(`<h1>Have fun at sprint!</h1>`);
 });
 
-//logger middleware
-function logger (req,res, next) {
-    console.log(req.method, req.url, Date.now())
-    next();
-};
 
 module.exports = server;
