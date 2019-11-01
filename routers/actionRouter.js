@@ -5,7 +5,7 @@ const projectDb = require("../data/helpers/projectModel");
 const actionDb = require("../data/helpers/actionModel");
 
 //import middleware
-const validateProjectid = require("../middleware/validateProjectID");
+const validateProjectId = require("../middleware/validateProjectID");
 const validateAction = require("../middleware/validateAction");
 const validateActionId = require("../middleware/validateActionID");
 
