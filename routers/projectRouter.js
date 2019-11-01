@@ -6,6 +6,7 @@ const actionDb = require ("../data/helpers/actionModel");
 
 //import middleware
 const validateProjectId = require("../middleware/validateProjectID");
+const validateproject = require("../middleware/validateProject");
 
 const router = express.Router();
 
@@ -43,6 +44,43 @@ router.get("/:id/actions", validateProjectId, (req, res) => {
         }
     }).catch(err => {
         res.status(500).json({ error: "Error retrieving posts" });
+    });
+});
+
+//post a project
+router.post("/", validateproject, (req, res) => {
+    const newProject = req.body;
+    projectDb
+    .insert(newProject)
+    .then(project => {
+        res.status(201).json(project);
+    }).catch(err => {
+        res.status(500).json({ error: "There was an error while saving the project to the database." });
+    });
+});
+
+//delete a project
+router.delete("/:id", validateProjectId, (req, res) => {
+    const id = req.params.id;
+    projectDb
+    .remove(id)
+    .then(project => {
+        res.status(200).json(id);
+    }).catch(err => {
+        res.status(500).json({ error: "Error removing project" });
+    });
+});
+
+//update a project
+router.put("/:id", validateProjectId, validateproject, (req, res) => {
+    const id = req.params.id;
+    const changes = req.body;
+    projectDb
+    .update(id, changes)
+    .then(project => {
+        res.status(200).json(project);
+    }).catch(err => {
+        res.status(500).json({ error: "Error updating project" });
     });
 });
 
