@@ -12,6 +12,7 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
+require('dotenv').config();
 
 const server = require('./server');
 

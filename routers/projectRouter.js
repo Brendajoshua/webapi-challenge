@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
 });
 
 //get project by id
-router.get("/id", validateProjectId, (req, res) => {
+router.get("/:id", validateProjectId, (req, res) => {
     const id = req.params.id;
     projectDb
     .get(id)
@@ -41,7 +41,9 @@ router.get("/:id/actions", validateProjectId, (req, res) => {
     .getProjectActions(projectId)
     .then(actions => {
         if (!actions.length) {
-            res.status(404).json({ message: "No actions from thus project." });
+            res.status(404).json({ message: "No actions from this project." });
+        } else {
+            res.status(200).json(actions)
         }
     }).catch(err => {
         res.status(500).json({ error: "Error retrieving posts" });

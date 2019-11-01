@@ -5,7 +5,7 @@ const ProjectList = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/projects`).then(res => {
+    axios.get(`http://localhost:5050/api/projects`).then(res => {
       console.log(res);
       setProjects(res.data);
     });
